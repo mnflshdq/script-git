@@ -1,5 +1,6 @@
-#!/bin/bash
+# compile latex main file
 
+#!/bin/bash
 filenametex=$(grep -r 'begin{document}' ./*.tex /dev/null | cut -f 1 -d ':' | cut -f 2 -d '/')
 filename=$(grep -r 'begin{document}' ./*.tex /dev/null | cut -f 1 -d ':' | cut -f 2 -d '/' | cut -f 1 -d '.')
 filenametex1=$(grep -r 'begin{document}' ../*.tex /dev/null | cut -f 1 -d ':' | cut -f 2 -d '/')
