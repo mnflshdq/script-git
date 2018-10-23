@@ -34,11 +34,11 @@ function compile()
     if [ $? -eq 0 ]; then
         echo
         printf "${yellow}main tex file $( get_tex_file_name ) found at $PWD\n"
-        printf "${green}compiling $( get_tex_file_name ) successful\n"
+        printf "${green}compiling $( get_tex_file_name ) successful\n${nc}"
     else
         echo
         printf "${yellow}main tex file $( get_tex_file_name ) found at $PWD\n"
-        printf "${red}compiling $( get_tex_file_name ) error\n"
+        printf "${red}compiling $( get_tex_file_name ) error${nc}\n"
     fi
 }
 
