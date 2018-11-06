@@ -7,6 +7,7 @@
 nc='\033[0m'
 # light green
 green='\033[1;32m'
+# yellow
 yellow='\033[1;33m'
 # light red
 red='\033[1;31m'
