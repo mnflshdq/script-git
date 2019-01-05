@@ -21,6 +21,7 @@ function open()
     evince $( get_file_name ).pdf&
 }
 
+cd $1
 if [ $( find_file ) -ne 0 ]; then
     open
 else

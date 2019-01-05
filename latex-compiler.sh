@@ -43,6 +43,7 @@ function compile()
     fi
 }
 
+cd $1
 if [ $( find_file ) -ne 0 ]; then
     compile
 else
