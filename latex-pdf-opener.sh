@@ -18,7 +18,7 @@ function get_file_name()
 
 function open()
 {
-    evince $( get_file_name ).pdf&
+    zathura $( get_file_name ).pdf& disown
 }
 
 cd $1

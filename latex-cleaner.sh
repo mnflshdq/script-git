@@ -7,8 +7,8 @@ green='\033[1;32m'
 
 function delete()
 {
-find . -maxdepth 1 -type f -name '*.aux' -name '*.bcf' -name '*.log' -name '*.bbl' -name '*.blg' -name '*.out' -name '*.xml' -name '*.gz' -delete
-printf "${green}DELETED${nc}"
+    rm *.aux *.bbl *.blg *.log *.pdf *.gz
+    printf "${green}DELETED${nc}"
 }
 
 function find_file()
