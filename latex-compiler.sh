@@ -14,25 +14,24 @@ red='\033[1;31m'
 
 function find_file()
 {
-    ack -n 'begin\{document\}' | wc -l
+    grep -R -i --include \*.tex begin{document} | grep tex | wc -l
 }
 
 function get_tex_file_name()
 {
-    echo $(ack -n 'begin\{document\}' | cut -f 1 -d ':')
+    echo $(grep -R -i --include \*.tex begin{document} | grep tex | cut -f 1 -d ':')
 }
 
 function get_file_name()
 {
-    echo $(ack -n 'begin\{document\}' | cut -f 1 -d ':' | cut -f 1 -d '.')
+    echo $(grep -R -i --include \*.tex begin{document} | grep tex | cut -f 1 -d ':' | cut -f 1 -d '.')
 }
 
 function compile()
 {
-    xelatex -synctex=1 -interaction=nonstopmode $( get_tex_file_name )
-    biber $( get_file_name )
-    xelatex -synctex=1 -interaction=nonstopmode $( get_tex_file_name )
-    if [ $? -eq 0 ]; then
+    latexmk -pdf -synctex=1 -file-line-error -shell-escape -interaction=nonstopmode $( get_tex_file_name )
+    exstat=$?
+    if [ ${exstat} -eq 0 ]; then
         echo
         printf "${yellow}main tex file $( get_tex_file_name ) found at $PWD\n"
         printf "${green}compiling $( get_tex_file_name ) success\n${nc}"
@@ -40,6 +39,7 @@ function compile()
         echo
         printf "${yellow}main tex file $( get_tex_file_name ) found at $PWD\n"
         printf "${red}compiling $( get_tex_file_name ) error${nc}\n"
+        read -n 1 -s -r -p "Press any key to continue"
     fi
 }
 
