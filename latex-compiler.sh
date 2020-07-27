@@ -29,7 +29,9 @@ function get_file_name()
 
 function compile()
 {
-    latexmk -pdf -synctex=1 -file-line-error -shell-escape -interaction=nonstopmode $( get_tex_file_name )
+    xelatex -synctex=1 -interaction=nonstopmode $( get_tex_file_name )
+    biber $( get_file_name )
+    xelatex -synctex=1 -interaction=nonstopmode $( get_tex_file_name )
     exstat=$?
     if [ ${exstat} -eq 0 ]; then
         echo
