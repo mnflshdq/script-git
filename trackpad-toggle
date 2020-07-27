@@ -1,0 +1,14 @@
+#!/bin/bash
+
+declare -i ID
+ID=`xinput list | grep 'TPPS/2 IBM TrackPoint' | grep -Eo 'id\=[0-9]{1,2}' | grep -Eo '[0-9]{1,2}'`
+declare -i STATE
+STATE=`xinput list-props $ID|grep 'Device Enabled'|awk '{print $4}'`
+if [ $STATE -eq 1 ]
+then
+    xinput disable $ID
+    echo "TrackPoint disabled."
+else
+    xinput enable $ID
+    echo "TrackPoint enabled."
+fi
