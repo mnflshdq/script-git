@@ -7,7 +7,7 @@ green='\033[1;32m'
 
 function delete()
 {
-    rm *.aux *.bbl *.blg *.log *.pdf *.gz
+    rm *.aux *.bbl *.blg *.log *.pdf *.gz *.bcf *.lof *.lot *.out *.xml *.toc
     printf "${green}DELETED${nc}"
 }
 
