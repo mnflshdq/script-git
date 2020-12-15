@@ -1,0 +1,36 @@
+#! /bin/bash
+
+GREEN="\033[0;32m"
+RED="\033[0;31m"
+NC="\033[0m"
+
+find $1 -type f \( -iname "*.zip" -o -iname "*.rar" \) -print0 | while read -d $'\0' file
+do
+    dir="${file%.*}"
+    if [[ -d $dir ]]; then
+        echo -e "${RED}directory exist${NC}"
+    else
+        case $file in
+            *".zip"*)
+                echo "$file is zip"
+                if unzip -tqq "$file"; then
+                    mkdir "$dir"
+                    # echo -e "${GREEN}zip valid${NC}"
+                    unzip -d "$dir" "$file" && rm "$file"
+                else
+                    echo -e "${RED}zip unvalid${NC}"
+                fi
+                ;;
+            *".rar"*)
+                echo "$file is rar"
+                if unrar t -inul "$file"; then
+                    mkdir "$dir"
+                    # echo -e "${GREEN}rar valid${NC}"
+                    unrar e "$file" "$dir" && rm "$file"
+                else
+                    echo -e "${RED}rar unvalid${NC}"
+                fi
+                ;;
+        esac
+    fi
+done
